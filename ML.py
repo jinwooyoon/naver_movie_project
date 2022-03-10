@@ -55,18 +55,37 @@ for unseen in unseen_idx:
         pred_R.append(0)
     else:
         pred_R.append(np.dot(iS,iR)/sumS)
-        
+    
     
 #%%
+import collections
+counts = collections.Counter(pred_R)
+print(counts)
 
-seen_idx
+#%%
+pos = []
+x = 10.000000000000002
+for i in range(len(pred_R)):
+    if pred_R[i] == x:
+        pos.append(i)
+
+
+#%%
+
+print(pos)
+
+#%%
+unseen_idx
 #%%
 items = list(ratings_matrix.columns)
+
+#%%
+
+
 #%%
 items.sort(revesed=True)
 #%%
-unseen_idx
-
+max(pred_R)
 
 #%%
 
@@ -80,3 +99,9 @@ print('No {:35s} {:s}'.format('Title','expected rating'))
 print('---{:s}{:s}'.format('-'*35,'-'*15))
 for i ,p in enumerate(pred_sort_index):
     
+#%%
+
+for i in pos:
+    print(items[unseen_idx[i]])
+
+# %%
