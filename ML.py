@@ -4,17 +4,20 @@ import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
 #%%
-data = pd.read_csv('./test_data.csv',encoding='utf-8')
+data = pd.read_csv('./real_data22222.csv',encoding='cp949')
+
+#%%
+data
 
 #%%
 
-data
+data['user_id'].unique()
 #%%
 data.drop('Unnamed: 0',axis=1,inplace=True)
 #%%
 data
 # %%
-ratings_matrix = data.pivot_table('reple_score',index='user_id',columns='title')
+ratings_matrix = data.pivot_table('reple_score',index='user_id',columns='movie_title')
 
 # %%
 ratings_matrix = ratings_matrix.fillna(0)
@@ -31,7 +34,7 @@ S
 # %%
 np.round(S,3)
 # %%
-user_id = 29
+user_id = 17
 top_n = 30
 movie_n = 10
 
@@ -45,7 +48,7 @@ for unseen in unseen_idx:
     
     iS = S[unseen,seen_idx][top_idx]
     iR = R[user_id,seen_idx][top_idx]
-    
+     
     sumS = np.abs(iS).sum()
     
     if sumS == 0:
@@ -56,10 +59,20 @@ for unseen in unseen_idx:
     
 #%%
 
-pred_R
+seen_idx
+#%%
+items = list(ratings_matrix.columns)
+#%%
+items.sort(revesed=True)
+#%%
+unseen_idx
+
 
 #%%
-seen_idx
+
+print(pred_R.sort(reverse=True))
+#%%
+items
 #%%
 print('\n영화 추천 목록 :User ={}'.format(user_id))
 print('---{:s} {:s}'.format('-'*35,'-'*15))
