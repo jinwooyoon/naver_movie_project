@@ -8,33 +8,34 @@ from collections import Counter
 
 #%%
 
-choice_filtering = [['신세계','애니메이션'],['알라딘','범죄'],['다크나이트','범죄']]
+choice_filtering = [['울지마 톤즈','다큐멘터리'],['폴란드로 간 아이들','다큐멘터리'],['다크나이트','바2보']]
 
 genre_filter = []
 
 for genre in choice_filtering:
     genre_filter.append(genre[1])
 
-a = Counter(genre_filter)
+genre_filter = Counter(genre_filter)
 
-print(a)
+max_value = max(list(genre_filter.values()))
 
 
+genre = None
 user_movie = []
+for key in list(genre_filter.keys()):
+    if max_value == 1:
+        genre = key
+        break
+    if genre_filter[key] == max_value:
+        genre = key
+
+for choice in choice_filtering:
+    if choice[1] == genre:
+        user_movie.append([choice[0],10])
 
 
 #%%
-for i,item in enumerate(choice_filtering):
-    if choice_filtering[0][1] == item[1]:
-        user_movie.append(item)
-
-
-
-
-#%%
-
 user_movie
-
  # %%
 data = pd.read_csv('./final_data.csv',encoding='cp949')
 
@@ -42,19 +43,11 @@ data = pd.read_csv('./final_data.csv',encoding='cp949')
 
 data = data[['movie_id','user_id','movie_title','rating','genre']]
 
-
-
-
+data
 
 #%%
 
-
-# data_genre = (data.genre =='드라마') | (data.genre =='애니메이션')
-
-
-#%%
-
-data_genre = data['genre'] =='범죄'
+data_genre = data['genre'] ==f'{genre}'
 data = data[data_genre]
 data
 
@@ -81,12 +74,15 @@ def get_similar_courses(course_name,user_score):
 
 similar_scores = pd.DataFrame()
 
-
-user_choice = [("신세계",10),("범죄와의 전쟁 : 나쁜놈들 전성시대",10),("대부",10)]
-for course,score in user_choice:
+for course,score in user_movie:
     similar_scores = similar_scores.append(get_similar_courses(course,score),ignore_index=True)
     
 similar_scores.head()
 # %%
-similar_scores.sum().sort_values(ascending=False).head(10)
+result = similar_scores.sum().sort_values(ascending=False).head(10)
+
+result = list(result.index)
+
+# %%
+result
 # %%
