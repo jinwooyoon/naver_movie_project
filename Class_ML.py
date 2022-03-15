@@ -45,7 +45,7 @@ class Movie:
         #영화 데이터 불러오고 칼럼 분류
         data = pd.read_csv(self._data_path,encoding='cp949')
 
-        data = data[['movie_id','user_id','movie_title','rating','genre']]
+        data = data[['movie_id','user_id','rating','genre']]
 
         # 데이터 프레임 장르 필터링
         data_genre = data['genre'] ==f'{self._genre}'
@@ -56,7 +56,7 @@ class Movie:
     def data_process(self):
                    
         #데이터 프레임 피봇테이블로 변경
-        user_score = self.data_load().pivot_table(index=['user_id'],columns=['movie_title'],values='rating')
+        user_score = self.data_load().pivot_table(index=['user_id'],columns=['movie_id'],values='rating')
         # nan값 처리 후 corr 상관분석
         user_scores = user_score.fillna(0)
         user_scores = user_scores.replace(np.nan,0)
@@ -85,9 +85,10 @@ class Movie:
         
         
         return result
-    
-    
-movie_recommend = Movie([['추격자','범죄'],['마더','범죄'],['신세계','범죄']])
+
+
+
+movie_recommend = Movie([[68695,'범죄'],[82540,'범죄'],['신세계','범321321죄']])
 
 movie_list = movie_recommend.start()
 print(movie_list)

@@ -105,5 +105,26 @@ result = pd.DataFrame(data1)
 
 res
 #%%
-result.to_csv('./real_dataee321421e.csv',encoding='utf-8')
+import pandas as pd
+data = pd.read_csv('./final_data.csv',encoding='cp949')
+
+
+
 # %%
+data['movie_id'].apply(lambda x : x.astype('str'))
+# %%
+
+data = data.astype({'movie_id':'str'},)
+data
+# %%
+type(data['movie_id'][0])
+# %%
+data.drop('Unnamed: 0',axis=1,inplace=True)
+# %%
+
+import pandas as pd
+data =pd.read_csv('./final_data.csv',encoding='cp949')
+
+
+#%%
+
