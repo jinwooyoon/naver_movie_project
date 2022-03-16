@@ -16,7 +16,7 @@ data['user_id'].unique()
 data.drop('Unnamed: 0',axis=1,inplace=True)
 #%%
 data
-# %%
+# %% 
 ratings_matrix = data.pivot_table('reple_score',index='user_id',columns='movie_title')
 
 # %%
