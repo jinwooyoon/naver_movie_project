@@ -17,7 +17,7 @@ class Movie:
         
     def start(self):
         
-        self.data_process()   
+        self.data_process()
         
         return self.result_movie()
         
@@ -33,6 +33,7 @@ class Movie:
             if max_prequency == 1:
                 self._genre = key
                 break
+            
             if self._genre_filter[key] == max_prequency:
                 self._genre = key
 
@@ -61,16 +62,12 @@ class Movie:
         user_scores = user_score.fillna(0)
         user_scores = user_scores.replace(np.nan,0)
         self._course_similarity_df = user_scores.corr(method='pearson')
-
-        
-
+                
     def get_similar_courses(self,course_name,user_score):
-        
 
-        similar_score = self._course_similarity_df[course_name] * (user_score - 2.5)
+        similar_score = self._course_similarity_df[course_name] * (user_score)
         similar_score = similar_score.sort_values(ascending=False)
         return similar_score
-
 
     def result_movie(self):
 

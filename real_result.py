@@ -52,7 +52,6 @@ for i in tqdm(Df_url):
         html = req.text
         soup = BeautifulSoup(html,'html.parser')
 
-
     #관람객 평점
 
     try:

@@ -1,11 +1,10 @@
-#%%
 from wordcloud import WordCloud
 from collections import Counter
 from konlpy.tag import Okt
 from matplotlib import pyplot as plt
 import pandas as pd
 import operator
-#%%
+import numpy as np
 
 del_word = ['영화','정말','우리','진짜','지금','대해','보고','놀란','한번']
 
@@ -35,10 +34,12 @@ for word in del_word:
         del c[word]
         
         
-wordcloud = WordCloud(font_path = 'HMFMPYUN', width=400, height=400, scale=2.0, max_font_size=250).generate_from_frequencies(c)
+def color_func(word, font_size, position,orientation,random_state=None, **kwargs):
+    return("hsl({:d},{:d}%, {:d}%)".format(np.random.randint(200,240), np.random.randint(80,100), np.random.randint(70,90)))
+        
+wordcloud = WordCloud(font_path = r'C:\Users\say_s\AppData\Local\Microsoft\Windows\Fonts\SB 어그로 B.ttf', background_color='black', colormap = "Accent_r", width=1000, height=800, max_words=50, min_font_size=20, color_func=color_func).generate_from_frequencies(c)
 plt.imshow(wordcloud) 
 plt.axis('off') 
 plt.show()
 
 
-# %%
