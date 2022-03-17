@@ -27,10 +27,10 @@ max_value = max(list(genre_filter.values()))
 
 #%%
 
+
 # 만약에 중복된 장르가 없으면 첫번째로 선택한 영화로 진행
 
 
-    
 for key in list(genre_filter.keys()):
     if max_value == 1:
         genre = key
@@ -75,7 +75,11 @@ user_scores = user_scores.replace(np.nan,0)
 
 #%%
 
+
 user_scores
+
+
+
 #%%
 course_similarity_df = user_scores.corr(method='pearson')
 
@@ -83,12 +87,44 @@ course_similarity_df
 
 #%%
 
+user_scores
+
 
 # course_similarity_df.to_csv(r'C:\Users\say_s\Desktop\naver_movie_project\비교\비교4.csv',encoding='cp949')
 #%%
 #%%
-#
+
+bb = pd.read_csv('./gaha.csv',encoding='cp949')
+
+bb
+#%%
+test1 = bb['21 그램'].mean()
+
+test2 = bb['21 그램'].mean()
+
+
+#%%
+
+test1 = bb['21 그램'] - test1
+test1
+#%%
+
+test2 = bb['21 그램'] - test2
+test2
+
+#%%
+
+test3 = np.sum(test1 * test2)
+
+test3
+#%%
+test3 / np.sqrt(np.sum(test1 **2) * np.sum(test2 **2))
+#%%
+
+
 # course_similarity_df.to_csv('./test.set.csv',encoding='cp949')
+
+
 
 #%%
 
