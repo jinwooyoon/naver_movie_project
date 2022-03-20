@@ -69,7 +69,7 @@ data
 
 
 # 데이터 프레임 장르 필터링
-data_genre = data['genre'] ==10
+data_genre = data['genre'] == genre
 data = data[data_genre]
 
 #%%
@@ -77,7 +77,7 @@ data
 
 #%%
 #데이터 프레임 피봇테이블로 변경
-user_score = data.pivot_table(index=['user_id'],columns=['movie_id'],values='rating')
+user_score = data.pivot_table(index=['user_id'],columns=['movie_title'],values='rating')
 
 
 user_score
@@ -136,6 +136,18 @@ test3 = np.sum(test1 * test2)
 test3
 #%%
 test3 / np.sqrt(np.sum(test1 **2) * np.sum(test2 **2))
+
+
+#%%
+
+s1_c = data['영화1'] - data['영화1'].mean()
+s2_c = data['영화2'] - data['영화2'].mean()
+
+
+pearson_result = np.sum(s1_c *s2_c) /np.sqrt(np.sum(s1_c**2) * np.sum(s2_c **2))
+
+
+
 #%%
 
 
@@ -153,9 +165,8 @@ test3 / np.sqrt(np.sum(test1 **2) * np.sum(test2 **2))
 def get_similar_courses(course_name,user_score):
     similar_score = course_similarity_df[course_name] * (user_score)
     similar_score = similar_score.sort_values(ascending=False)
-    
-    return similar_score
 
+    return similar_score
 
 
 #%%
@@ -163,6 +174,8 @@ def get_similar_courses(course_name,user_score):
 
 similar_scores = pd.DataFrame()
 
+
+#%%
 # 유저가 선택한 영화로 영화추천
 for course,score in user_movie:
     similar_scores = similar_scores.append(get_similar_courses(course,score),ignore_index=True)
@@ -176,11 +189,10 @@ similar_scores.to_csv(r'C:\Users\say_s\Desktop\naver_movie_project\비교\비교
 
 #%%
 #결과값 리스트로 추출
-result = similar_scores.sum().sort_values(ascending=False).head(10+len(user_movie))
+result = similar_scores.sum().sort_values(ascending=False).head(13)
 
-result
-# result = list(result.index)
-# result = result[len(user_movie):]
+result = list(result.index)
+result = result[3:]
 
 print(result)
 # %%

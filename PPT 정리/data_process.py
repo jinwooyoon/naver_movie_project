@@ -30,6 +30,8 @@ for i in tqdm(user_list2):
     del_data = data[data['user_name'] == f'{i}'].index
     data.drop(del_data,inplace=True)
     
+    
+# user_name 고유번호로 변겅
 data = pd.read_csv('./important_data.csv',encoding='cp949')
 
 data_name = list(data['user_name'].unique())
@@ -47,6 +49,8 @@ all_data = all_data[['movie_id','genre']]
 
 result_data  = pd.merge(data,all_data,on='movie_id')
 
+# genre 고유번호로 변경
+
 genre_number = pd.read_csv('./genre_number_result.csv',encoding='cp949')
 
 genre_name = list(genre_number['genre'].unique())
@@ -55,3 +59,5 @@ for i,name in tqdm(enumerate(genre_name)):
     result_data['genre'] = result_data['genre'].replace(f'{name}',f'{i}')
 
 result_data.to_csv('./final_data.csv',encoding='cp949')
+
+
