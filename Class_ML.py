@@ -13,7 +13,6 @@ class Movie:
         self._user_movie = []
         self._genre = None
         self._course_similarity_df = None
-
         
     def start(self):
         
@@ -80,9 +79,7 @@ class Movie:
         result = list(result.index)
         result = result[len(self._user_movie):]
         
-        
         return result
-    
 
 movie_recommend = Movie([['범죄도시','범죄'],[82540,'범죄'],['신세계','범321321죄']])
 
