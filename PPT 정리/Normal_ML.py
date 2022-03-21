@@ -111,41 +111,60 @@ user_scores
 #%%
 #%%
 
-bb = pd.read_csv('./gaha.csv',encoding='cp949')
-
-bb
-#%%
-test1 = bb['21 그램'].mean()
-
-test2 = bb['21 그램'].mean()
+data = pd.read_csv('./gaha.csv',encoding='cp949')
 
 
 #%%
-
-test1 = bb['21 그램'] - test1
-test1
+test1 = data['21 그램'].mean()
 #%%
 
-test2 = bb['21 그램'] - test2
+test2 = data['JFK'].mean()
+
+#%%
 test2
+#%%
+
+test1 = data['21 그램'] - test1
+#%%
+test1.to_csv('./minus.csv',encoding='cp949')
+#%%
+
+test2 = data['JFK'] - test2
+
+#%%
+
+test2.unique()
+
+
+
+#%%
+test2.to_csv('./minus2.csv',encoding='cp949')
+
+
 
 #%%
 
 test3 = np.sum(test1 * test2)
 
 test3
+
+
+
+
 #%%
 test3 / np.sqrt(np.sum(test1 **2) * np.sum(test2 **2))
 
 
+
+
 #%%
 
-s1_c = data['영화1'] - data['영화1'].mean()
-s2_c = data['영화2'] - data['영화2'].mean()
+s1_c = data['21 그램'] - data['21 그램'].mean()
+s2_c = data['JFK'] - data['JFK'].mean()
 
 
 pearson_result = np.sum(s1_c *s2_c) /np.sqrt(np.sum(s1_c**2) * np.sum(s2_c **2))
-
+pearson_result
 
 
 #%%
@@ -153,6 +172,8 @@ pearson_result = np.sum(s1_c *s2_c) /np.sqrt(np.sum(s1_c**2) * np.sum(s2_c **2))
 
 # course_similarity_df.to_csv('./test.set.csv',encoding='cp949')
 
+#%%
+1.5  * -1.5
 
 
 #%%
